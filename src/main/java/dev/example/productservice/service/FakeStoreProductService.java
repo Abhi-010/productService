@@ -2,8 +2,10 @@ package dev.example.productservice.service;
 
 import dev.example.productservice.dtos.FakeStoreProductDto;
 import dev.example.productservice.dtos.GenericProductDto;
+import dev.example.productservice.exception.NotFoundException;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RequestCallback;
@@ -37,7 +39,7 @@ public class FakeStoreProductService implements ProductService {
         return genericProductDto;
     }
     @Override
-    public GenericProductDto deleteProductById(Long id) {
+    public GenericProductDto deleteProductById(Long id) throws NotFoundException {
         RestTemplate restTemplate = restTemplateBuilder.build();
         RequestCallback requestCallback = restTemplate.acceptHeaderRequestCallback(FakeStoreProductDto.class);
         ResponseExtractor<ResponseEntity<FakeStoreProductDto>> responseExtractor =
@@ -47,6 +49,11 @@ public class FakeStoreProductService implements ProductService {
                 restTemplate.execute(specificProductRequestUrl, HttpMethod.DELETE, requestCallback, responseExtractor, id);
 
         FakeStoreProductDto fakeStoreProductDto =responseEntity.getBody();
+        // We should handle this exception..
+
+        if(fakeStoreProductDto == null){
+            throw new NotFoundException("Product with id " + id + " doesn't exist");
+        }
 
         return convertFakeStoreProductToGenericProduct(fakeStoreProductDto);
 

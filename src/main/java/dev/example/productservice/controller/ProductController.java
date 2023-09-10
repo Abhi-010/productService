@@ -1,6 +1,8 @@
 package dev.example.productservice.controller;
 
+import dev.example.productservice.dtos.ExceptionDto;
 import dev.example.productservice.dtos.GenericProductDto;
+import dev.example.productservice.exception.NotFoundException;
 import dev.example.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -40,7 +42,7 @@ public class ProductController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<GenericProductDto> deleteProductById(@PathVariable("id") Long id) {
+    public ResponseEntity<GenericProductDto> deleteProductById(@PathVariable("id") Long id) throws NotFoundException {
 
         ResponseEntity<GenericProductDto> responseEntity =
                 new ResponseEntity<>(productService.deleteProductById(id), HttpStatus.NOT_FOUND);
@@ -56,5 +58,11 @@ public class ProductController {
     @PutMapping("{id}")
     public void updateProductById() {
 
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    private ResponseEntity<ExceptionDto> handleNotException(){
+        return new ResponseEntity<>(new ExceptionDto(HttpStatus.NOT_FOUND,"Product doesn't exist"),
+                HttpStatus.NOT_FOUND);
     }
 }

@@ -1,0 +1,29 @@
+[33mcommit c62537c30b75e21d53e2424bfe139eda3a76a912[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Abhi-010 <115487002+Abhi-010@users.noreply.github.com>
+Date:   Sun Sep 10 18:02:50 2023 +0530
+
+    http status code include
+
+[33mcommit 4830ea3700afd3f3f87444e2c71004273e2cfab2[m
+Author: Abhi-010 <115487002+Abhi-010@users.noreply.github.com>
+Date:   Sun Sep 10 17:50:40 2023 +0530
+
+    remove duplicate code
+
+[33mcommit 8fe40748a4f7c022eb68adc195a3be899bdaaffc[m
+Author: Abhi-010 <115487002+Abhi-010@users.noreply.github.com>
+Date:   Sun Sep 10 17:36:35 2023 +0530
+
+    Delete Product By ID
+
+[33mcommit ab37ffb78355c4ce71b293820817c2d131fca950[m
+Author: Abhi-010 <115487002+Abhi-010@users.noreply.github.com>
+Date:   Sun Sep 10 11:36:46 2023 +0530
+
+    getAllProducts
+
+[33mcommit 62cae868e6dc0539e3d1a6eee62e363679677092[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: Abhi-010 <115487002+Abhi-010@users.noreply.github.com>
+Date:   Thu Sep 7 12:25:20 2023 +0530
+
+    getbyID
