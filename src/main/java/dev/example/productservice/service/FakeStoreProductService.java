@@ -9,15 +9,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class FakeStoreProductService implements ProductService {
 
     private RestTemplateBuilder restTemplateBuilder;
     private String getProductRequestUrl = "https://fakestoreapi.com/products/{id}";
+    private String getAllProductUrl = "https://fakestoreapi.com/products";
 
     public FakeStoreProductService(RestTemplateBuilder restTemplateBuilder){
         this.restTemplateBuilder = restTemplateBuilder;
     }
+
 
 
     @Override
@@ -37,5 +42,38 @@ public class FakeStoreProductService implements ProductService {
 
         return genericProductDto;
 
+    }
+
+    @Override
+    public List<GenericProductDto> getAllProduct() {
+        RestTemplate restTemplate = restTemplateBuilder.build();
+        ResponseEntity<FakeStoreProductDto[]> responseEntity =
+                restTemplate.getForEntity(getAllProductUrl,FakeStoreProductDto[].class);
+
+        FakeStoreProductDto[] listOfFakeStoreProducts = responseEntity.getBody();
+
+        ArrayList<GenericProductDto> listOfGenericProducts =
+                convertFakeStoreProductToGenericProduct(listOfFakeStoreProducts);
+
+        return listOfGenericProducts;
+    }
+
+    public ArrayList<GenericProductDto> convertFakeStoreProductToGenericProduct(FakeStoreProductDto[] list){
+
+        ArrayList<GenericProductDto> listOfGenericProducts = new ArrayList<>();
+
+        for(FakeStoreProductDto l : list){
+            GenericProductDto genericProductDto = new GenericProductDto();
+            genericProductDto.setId(l.getId());
+            genericProductDto.setDescription(l.getDescription());
+            genericProductDto.setCategory(l.getCategory());
+            genericProductDto.setPrice(l.getPrice());
+            genericProductDto.setTitle(l.getTitle());
+            genericProductDto.setImage(l.getImage());
+
+            listOfGenericProducts.add(genericProductDto);
+
+        }
+        return listOfGenericProducts;
     }
 }
