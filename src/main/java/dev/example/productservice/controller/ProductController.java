@@ -4,6 +4,9 @@ import dev.example.productservice.dtos.GenericProductDto;
 import dev.example.productservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -37,9 +40,11 @@ public class ProductController {
     }
 
     @DeleteMapping("{id}")
-    public GenericProductDto deleteProductById(@PathVariable("id") Long id) {
-        
-        return productService.deleteProductById(id);
+    public ResponseEntity<GenericProductDto> deleteProductById(@PathVariable("id") Long id) {
+
+        ResponseEntity<GenericProductDto> responseEntity =
+                new ResponseEntity<>(productService.deleteProductById(id), HttpStatus.NOT_FOUND);
+        return responseEntity;
 
     }
 
