@@ -2,6 +2,7 @@ package dev.example.productservice.thirdpartyclients.productservice.fakestore;
 
 import dev.example.productservice.dtos.GenericProductDto;
 import dev.example.productservice.exceptions.NotFoundException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +22,34 @@ import java.util.List;
 @Service
 public class FakeStoreProductServiceClient {
     private RestTemplateBuilder restTemplateBuilder;
-    private String specificProductRequestUrl = "https://fakestoreapi.com/products/{id}";
-    private String productRequestBaseUrl = "https://fakestoreapi.com/products";
+
+//    fakestore.api.url = https://fakestoreapi.com
+//    fakestore.api.paths.product = /products
+//    private String specificProductRequestUrl = "https://fakestoreapi.com/products/{id}";
+//    private String productRequestBaseUrl = "https://fakestoreapi.com/products";
+
+
+    @Value("${fakestore.api.url}")
+    private String fakeStoreApiUrl ;
+
+    @Value("${fakestore.api.paths.product}")
+    private String fakeStorePathProduct ;
+
+    private String specificProductRequestUrl ;
+    private String productRequestBaseUrl ;
+
 
     private GenericProductDto genericProductDto = new GenericProductDto();
 
-    public FakeStoreProductServiceClient(RestTemplateBuilder restTemplateBuilder){
+    public FakeStoreProductServiceClient(RestTemplateBuilder restTemplateBuilder,
+                                         @Value("${fakestore.api.paths.product}")  String fakeStorePathProduct,
+                                         @Value("${fakestore.api.url}")  String fakeStoreApiUrl){
         this.restTemplateBuilder = restTemplateBuilder;
+        this.fakeStoreApiUrl = fakeStoreApiUrl;
+        this.fakeStorePathProduct = fakeStorePathProduct;
+
+        this.specificProductRequestUrl = fakeStoreApiUrl + fakeStorePathProduct + "/{id}" ;
+        this.productRequestBaseUrl =  fakeStoreApiUrl + fakeStorePathProduct ;
     }
 
     public FakeStoreProductDto deleteProductById(Long id) throws NotFoundException {
