@@ -1,7 +1,7 @@
-package dev.example.productservice.service;
+package dev.example.productservice.services;
 
 import dev.example.productservice.dtos.GenericProductDto;
-import dev.example.productservice.exception.NotFoundException;
+import dev.example.productservice.exceptions.NotFoundException;
 
 import java.util.List;
 

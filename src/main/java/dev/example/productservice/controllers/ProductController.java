@@ -1,18 +1,13 @@
-package dev.example.productservice.controller;
+package dev.example.productservice.controllers;
 
-import dev.example.productservice.dtos.ExceptionDto;
 import dev.example.productservice.dtos.GenericProductDto;
-import dev.example.productservice.exception.NotFoundException;
-import dev.example.productservice.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import dev.example.productservice.exceptions.NotFoundException;
+import dev.example.productservice.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 

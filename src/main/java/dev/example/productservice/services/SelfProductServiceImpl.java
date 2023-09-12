@@ -1,4 +1,4 @@
-package dev.example.productservice.service;
+package dev.example.productservice.services;
 
 import dev.example.productservice.dtos.GenericProductDto;
 import org.springframework.stereotype.Service;

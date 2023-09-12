@@ -1,4 +1,4 @@
-package dev.example.productservice.exception;
+package dev.example.productservice.exceptions;
 
 import dev.example.productservice.dtos.ExceptionDto;
 import org.springframework.http.HttpStatus;
