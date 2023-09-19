@@ -1,6 +1,9 @@
-package model;
+package dev.example.productservice.models;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class Category extends BaseModel{
-
+    private String name;
 
 }
