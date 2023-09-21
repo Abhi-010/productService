@@ -16,9 +16,7 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 
     //List<Product> findAllById(String name);
 
-    @Query(value = "select * from product join product_order on" +
-            " product.id = product_order.producttt_id" +
-            " where title = :title", nativeQuery = true)
+    @Query(value = CustomQueries.FIND_ALL_BY_TITLE, nativeQuery = true)
     List<Product> findAllByTitle(String title);
 
 
