@@ -19,6 +19,16 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
     @Query(value = CustomQueries.FIND_ALL_BY_TITLE, nativeQuery = true)
     List<Product> findAllByTitle(String title);
 
+//    @Query("select Product.description from Product where " +
+//            "Product.price.currency = :currency and " +
+//            "Product.title = :title")
+//    List<Product> readAllByTitle(String currency, String title);
+
+//    @Query("select Product from Product where " +
+//            "Product.price.currency = :currency and " +
+//            "Product.title = :title")
+//    List<Product> readAllByCurrencyAndTitle(String currency, String title);
+
 
 //    List<Product> findAll(String tittle);
 

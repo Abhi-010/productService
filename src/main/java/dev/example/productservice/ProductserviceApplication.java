@@ -14,6 +14,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @SpringBootApplication
@@ -75,18 +76,43 @@ public class ProductserviceApplication implements CommandLineRunner {
         productRepository.save(product);
 
 
-        Product product1 = productRepository.findAllById(UUID.fromString("53ab81f8-6097-4574-b035-acae1bd83309"));
-        System.out.println("Your producttttt......");
-        System.out.println(product1);
+        System.out.println("Fetching Category for 4fc2a886-96fd-4213-a387-4880c2d3ef75");
+        Thread.sleep(1000);
+        Optional<Category> category1Optional =
+                categoryRepository.findById(UUID.fromString("4fc2a886-96fd-4213-a387-4880c2d3ef75"));
 
-        System.out.println("findByTitle.. Native Query...!!");
-        List<Product> productList = productRepository.findAllByTitle("Iphone 15 Pro");
-        System.out.println("Size of productList is " + productList.size());
+        Category category1 = category1Optional.get();
 
+        System.out.println("Fetching Products for Category");
+        Thread.sleep(1000);
+        category1.getProductList();
+
+
+
+
+
+
+//        Product product1 = productRepository.findAllById(UUID.fromString("53ab81f8-6097-4574-b035-acae1bd83309"));
+//        System.out.println("Your producttttt......");
+//        System.out.println(product1);
+//
+//        System.out.println("findByTitle.. Native Query...!!");
+//        List<Product> productList = productRepository.findAllByTitle("Iphone 15 Pro");
+//        System.out.println("Size of productList is " + productList.size());
+
+
+
+    /*
         for(Product p : productList){
             System.out.println("Hey you are inside....");
             System.out.println(p);
         }
+     */
+//        List<Product> productList1 = productRepository.readAllByCurrencyAndTitle("Ruppee","Iphone 15 Pro");
+//        for(Product p : productList1){
+//            //System.out.println("Hey you are inside....");
+//            System.out.println(p);
+//        }
 
 
         //deleting a price id from product table

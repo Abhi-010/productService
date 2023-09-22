@@ -18,7 +18,9 @@ public class Product extends BaseModel {
     @ManyToOne
     @JoinColumn(name="categoryyy")
     private Category category;
+
     @OneToOne(cascade = {CascadeType.PERSIST,CascadeType.REMOVE})
+
     private Price price;
 
 }
