@@ -11,6 +11,9 @@ public interface CategoryRepository extends JpaRepository<Category, UUID> {
     @Override
     Optional<Category> findById(UUID uuid);
 
+    @Override
+    List<Category> findAllById(Iterable<UUID> uuids);
+
     //List<Category> findAllByName(String name);
 
     //List<Category> findById(String uuid);
